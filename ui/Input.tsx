@@ -12,7 +12,7 @@ export default function Input({ label, labelProps, inputProps }: InputProps) {
       <span className="pl-2">{label}</span>
       <input
         type="text"
-        className="border-2 border-teal-600 px-4 py-2 text-sm"
+        className="border-2 border-teal-600 px-4 py-2 text-sm read-only:bg-gray-200"
         {...inputProps}
       />
     </label>

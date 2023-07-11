@@ -15,7 +15,7 @@ export default function Select({
 }: SelectProps) {
   return (
     <label
-      className="relative flex flex-col text-xs after:absolute after:right-[15px] after:top-[30px] after:text-cyan-950 after:content-['▼']"
+      className="relative flex flex-col text-xs after:absolute after:right-[20px] after:top-[30px] after:text-cyan-950 after:content-['▼']"
       {...labelProps}
     >
       <span>{label}</span>

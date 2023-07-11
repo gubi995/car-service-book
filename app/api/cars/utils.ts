@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 
 import { Car } from '@/types/car';
 
@@ -7,4 +7,8 @@ export const readCarJson = () => {
   const { cars } = JSON.parse(carsJSON) as { cars: Car[] };
 
   return cars;
+};
+
+export const updateCarJson = (cars: Car[]) => {
+  writeFileSync('db/cars.json', JSON.stringify({ cars }));
 };
