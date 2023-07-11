@@ -1,0 +1,20 @@
+{
+  "cars": [
+    {
+      "brand": "Ford",
+      "type": "Mondeo",
+      "year": 2010,
+      "enginePerformance": "103 KW",
+      "motorNumber": "QXBA",
+      "chassisNumber": "WF0GXXGBBGAL32657",
+      "plateNumber": "RNB-859",
+      "serviceInterval": 10000,
+      "serviceIntervalMetric": "km",
+      "owner": {
+        "name": "Grúber Adrián",
+        "address": "6727, Szeged, Dialdal utca 4/A",
+        "phoneNumber": "+36202297961"
+      }
+    }
+  ]
+}
