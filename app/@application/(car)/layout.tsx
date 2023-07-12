@@ -22,11 +22,11 @@ export default async function RootLayout({
             <h2 className="mb-2 font-semibold">Registered cars</h2>
             <nav className="flex flex-col gap-10">
               <ul>
-                {cars.map(({ plateNumber, brand, type, chassisNumber }) => (
+                {cars.map(({ plateNumber, make, model, chassisNumber }) => (
                   <li key={plateNumber}>
                     <Link href={`/cars/${chassisNumber}`}>
                       <span className="text-sm">
-                        {brand} {type} <span>({plateNumber})</span>
+                        {make} {model} <span>({plateNumber})</span>
                       </span>
                     </Link>
                   </li>
@@ -34,13 +34,18 @@ export default async function RootLayout({
               </ul>
               <Link
                 href={'#'}
-                className="mx-[-2rem] flex justify-center  bg-cyan-900 p-3 text-sm text-cyan-200"
+                className="mx-[-2rem] flex justify-center bg-cyan-900 p-3 text-sm text-cyan-200"
               >
                 Add a new car +
               </Link>
             </nav>
           </aside>
-          <section className="overflow-auto">{children}</section>
+          <section
+            style={{ scrollbarGutter: 'stable' }}
+            className="overflow-auto"
+          >
+            {children}
+          </section>
         </div>
       </main>
     </>

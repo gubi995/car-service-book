@@ -1,13 +1,15 @@
 export interface Car {
-  brand: string;
-  type: string;
+  make: string;
+  model: string;
   year: number;
   enginePerformance: string;
   motorNumber?: string;
   chassisNumber: string;
   plateNumber: string;
+  mileage: number;
+  fuelType: 'Diesel' | 'Petrol' | 'CNG';
   serviceInterval: number;
-  serviceIntervalMetric: string;
+  metric: 'km' | 'mi';
   owner: Owner;
 }
 
