@@ -1,15 +1,17 @@
 {
   "cars": [
     {
-      "brand": "Ford",
-      "type": "Mondeo",
+      "make": "Ford",
+      "model": "Mondeo",
       "year": 2010,
       "enginePerformance": "103 KW",
       "motorNumber": "QXBA",
       "chassisNumber": "WF0GXXGBBGAL32657",
       "plateNumber": "RNB-859",
+      "mileage": 256000,
+      "fuelType": "Diesel",
       "serviceInterval": 10000,
-      "serviceIntervalMetric": "km",
+      "metric": "km",
       "owner": {
         "name": "Grúber Adrián",
         "address": "6727, Szeged, Dialdal utca 4/A",

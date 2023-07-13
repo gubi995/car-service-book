@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 import { readCarJson, updateCarJson } from '@/app/api/cars/utils';
-import { Car } from '@/types/car';
+import { CarSchema } from '@/types/car';
 
 export const GET = (
   request: NextRequest,
@@ -24,10 +24,19 @@ export const GET = (
 
 export const PATCH = async (request: NextRequest) => {
   const cars = readCarJson();
-  const carToUpdate = (await request.json()) as unknown as Car;
+  const car = await request.json();
+  const carToUpdate = CarSchema.safeParse(car);
+
+  if (!carToUpdate.success)
+    return NextResponse.json(
+      {
+        error: carToUpdate.error.message,
+      },
+      { status: 400 }
+    );
 
   const carIndexToUpdate = cars.findIndex(
-    (car) => car.chassisNumber === carToUpdate.chassisNumber
+    (car) => car.chassisNumber === carToUpdate.data.chassisNumber
   );
 
   if (carIndexToUpdate === -1)
@@ -38,7 +47,7 @@ export const PATCH = async (request: NextRequest) => {
       { status: 404 }
     );
 
-  cars[carIndexToUpdate] = { ...cars[carIndexToUpdate], ...carToUpdate };
+  cars[carIndexToUpdate] = { ...cars[carIndexToUpdate], ...carToUpdate.data };
 
   updateCarJson(cars);
 

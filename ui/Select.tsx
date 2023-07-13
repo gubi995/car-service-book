@@ -5,6 +5,7 @@ interface SelectProps {
   labelProps?: ComponentProps<'label'>;
   selectProps?: ComponentProps<'select'>;
   options?: ComponentProps<'option'>[];
+  error?: string;
 }
 
 export default function Select({
@@ -12,6 +13,7 @@ export default function Select({
   labelProps,
   selectProps,
   options,
+  error,
 }: SelectProps) {
   return (
     <label
@@ -27,6 +29,7 @@ export default function Select({
           <option key={optionProp.value?.toString()} {...optionProp} />
         ))}
       </select>
+      <span className="h-4 pl-2 text-red-500">{error}</span>
     </label>
   );
 }

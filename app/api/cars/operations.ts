@@ -29,9 +29,7 @@ export const getCarById = async (chassisNumber: string) => {
   return data as Car;
 };
 
-export const updateCar = async (form: FormData) => {
-  const car = Object.fromEntries(form.entries());
-
+export const updateCar = async (car: Car) => {
   const response = await fetch(
     `http://localhost:3000/api/cars/${car.chassisNumber}`,
     {
