@@ -1,43 +1,80 @@
 'use client';
 
+import { useTransition } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { updateCar } from '@/app/api/cars/operations';
 import { Car, CarSchema } from '@/types/car';
 import Button from '@/ui/Button';
 import Input from '@/ui/Input';
 import Select from '@/ui/Select';
-import { useTransition } from 'react';
+
+const defaultValues: Car = {
+  make: '',
+  model: '',
+  chassisNumber: '',
+  fuelType: 'Petrol',
+  metric: 'km',
+  mileage: 0,
+  year: 0,
+  enginePerformance: '',
+  motorNumber: '',
+  plateNumber: '',
+  serviceInterval: 0,
+  owner: {
+    name: '',
+    address: '',
+    phoneNumber: '',
+  },
+};
 
 interface CarFormProps {
-  car: Car;
+  car?: Car;
+  operation: (car: Car) => Promise<void>;
 }
 
-export default function CarForm({ car }: CarFormProps) {
+export default function CarForm({ car, operation }: CarFormProps) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty, isValid },
   } = useForm<Car>({
     mode: 'onBlur',
-    defaultValues: car,
+    defaultValues: car ?? defaultValues,
     resolver: zodResolver(CarSchema),
   });
   const [isPending, startTransition] = useTransition();
 
   const onSubmit: SubmitHandler<Car> = (car) => {
     startTransition(() => {
-      updateCar(car);
+      operation(car);
     });
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-4 flex flex-col">
+      {!Boolean(car) && (
+        <>
+          <Input
+            label="Make"
+            inputProps={{
+              ...register('make'),
+            }}
+            error={errors?.make?.message}
+          />
+          <Input
+            label="Model"
+            inputProps={{
+              ...register('model'),
+            }}
+            error={errors?.model?.message}
+          />
+        </>
+      )}
       <Input
         label="Chassis number"
         inputProps={{
-          readOnly: true,
+          readOnly: Boolean(car),
           ...register('chassisNumber'),
         }}
         error={errors?.chassisNumber?.message}
@@ -111,10 +148,10 @@ export default function CarForm({ car }: CarFormProps) {
 
       <Button
         type="submit"
-        disabled={isPending}
+        disabled={isPending || !isDirty || !isValid}
         className="mt-5 w-[150px] self-center"
       >
-        Update
+        {car ? 'Update' : 'Create'}
       </Button>
     </form>
   );

@@ -22,18 +22,24 @@ export default async function RootLayout({
             <h2 className="mb-2 font-semibold">Registered cars</h2>
             <nav className="flex flex-col gap-10">
               <ul>
-                {cars.map(({ plateNumber, make, model, chassisNumber }) => (
-                  <li key={plateNumber}>
-                    <Link href={`/cars/${chassisNumber}`}>
-                      <span className="text-sm">
-                        {make} {model} <span>({plateNumber})</span>
-                      </span>
-                    </Link>
+                {cars.length ? (
+                  cars.map(({ plateNumber, make, model, chassisNumber }) => (
+                    <li key={plateNumber}>
+                      <Link href={`/cars/${chassisNumber}`}>
+                        <span className="text-sm">
+                          {make} {model} <span>({plateNumber})</span>
+                        </span>
+                      </Link>
+                    </li>
+                  ))
+                ) : (
+                  <li>
+                    <span className="text-sm">No car registered yet.</span>
                   </li>
-                ))}
+                )}
               </ul>
               <Link
-                href={'#'}
+                href="/cars/new"
                 className="mx-[-2rem] flex justify-center bg-cyan-900 p-3 text-sm text-cyan-200"
               >
                 Add a new car +

@@ -17,6 +17,24 @@
         "address": "6727, Szeged, Dialdal utca 4/A",
         "phoneNumber": "+36202297961"
       }
+    },
+    {
+      "make": "Suzuki",
+      "model": "Swift",
+      "year": 2000,
+      "enginePerformance": "90 KW",
+      "motorNumber": "ABCD",
+      "chassisNumber": "WF0GXXGBBGAL32651",
+      "plateNumber": "AAA-222",
+      "mileage": 299000,
+      "fuelType": "Petrol",
+      "serviceInterval": 15000,
+      "metric": "km",
+      "owner": {
+        "name": "Grúber Adrián",
+        "address": "Diadal utca 4/A",
+        "phoneNumber": "+36202297961"
+      }
     }
   ]
 }

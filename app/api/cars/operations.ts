@@ -33,6 +33,7 @@ export const updateCar = async (car: Car) => {
   const response = await fetch(
     `http://localhost:3000/api/cars/${car.chassisNumber}`,
     {
+      cache: 'no-store',
       method: 'PATCH',
       body: JSON.stringify(car),
     }
@@ -42,6 +43,18 @@ export const updateCar = async (car: Car) => {
     throw new Error(
       `Failed to update car with ${car.chassisNumber} chassis number.`
     );
+
+  revalidateTag('car');
+};
+
+export const createCar = async (car: Car) => {
+  const response = await fetch(`http://localhost:3000/api/cars`, {
+    cache: 'no-store',
+    method: 'POST',
+    body: JSON.stringify(car),
+  });
+
+  if (!response.ok) throw new Error(`Failed to register the provided car.`);
 
   revalidateTag('car');
 };

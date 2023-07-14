@@ -6,7 +6,7 @@ export default function Button({
 }: ComponentProps<'button'>) {
   return (
     <button
-      className={`flex justify-center bg-cyan-900 p-3 text-sm text-cyan-200 ${className}`}
+      className={`flex justify-center bg-cyan-900 p-3 text-sm text-cyan-200 disabled:bg-gray-500 ${className}`}
       {...rest}
     />
   );

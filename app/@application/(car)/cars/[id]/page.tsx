@@ -1,4 +1,5 @@
 import { getCarById } from '@/app/api/cars/operations';
+import { updateCar } from '@/app/api/cars/operations';
 import CarForm from '@/components/CarForm';
 import Accordion from '@/ui/Accordion';
 
@@ -15,7 +16,7 @@ export default async function CarDetailPage({
         {car.make} {car.model}
       </h2>
       <Accordion label="Details">
-        <CarForm car={car} />
+        <CarForm car={car} operation={updateCar} />
       </Accordion>
     </div>
   );

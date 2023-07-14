@@ -30,7 +30,7 @@ export const PATCH = async (request: NextRequest) => {
   if (!carToUpdate.success)
     return NextResponse.json(
       {
-        error: carToUpdate.error.message,
+        error: carToUpdate.error.formErrors.fieldErrors,
       },
       { status: 400 }
     );
