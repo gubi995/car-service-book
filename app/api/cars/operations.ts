@@ -1,6 +1,6 @@
 'use server';
 
-import { Car } from '@/types/car';
+import { Car, CarSchema, CarsSchema } from '@/types/car';
 import { revalidateTag } from 'next/cache';
 
 export const getCars = async () => {
@@ -12,7 +12,7 @@ export const getCars = async () => {
 
   const data = await response.json();
 
-  return data.cars as Car[];
+  return CarsSchema.parse(data).cars;
 };
 
 export const getCarById = async (chassisNumber: string) => {
@@ -26,7 +26,7 @@ export const getCarById = async (chassisNumber: string) => {
 
   const data = await response.json();
 
-  return data as Car;
+  return CarSchema.parse(data);
 };
 
 export const updateCar = async (car: Car) => {
@@ -40,9 +40,9 @@ export const updateCar = async (car: Car) => {
   );
 
   if (!response.ok)
-    throw new Error(
-      `Failed to update car with ${car.chassisNumber} chassis number.`
-    );
+    return {
+      error: `Failed to update car with ${car.chassisNumber} chassis number.`,
+    };
 
   revalidateTag('car');
 };
@@ -54,7 +54,7 @@ export const createCar = async (car: Car) => {
     body: JSON.stringify(car),
   });
 
-  if (!response.ok) throw new Error(`Failed to register the provided car.`);
+  if (!response.ok) return { error: `Failed to register the provided car.` };
 
   revalidateTag('car');
 };

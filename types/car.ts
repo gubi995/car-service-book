@@ -6,6 +6,13 @@ export const OwnerSchema = z.object({
   phoneNumber: z.string().optional(),
 });
 
+export const ServiceSchema = z.object({
+  id: z.string().ulid().nonempty(),
+  carChassisNumber: z.string().nonempty(),
+  date: z.coerce.date(),
+  //Other fields
+});
+
 export const CarSchema = z.object({
   make: z.string().nonempty(),
   model: z.string().nonempty(),
@@ -19,10 +26,15 @@ export const CarSchema = z.object({
   serviceInterval: z.coerce.number().optional(),
   metric: z.literal('km').or(z.literal('mi')),
   owner: OwnerSchema,
+  services: z.array(ServiceSchema.shape.date),
+});
+
+export const CarsSchema = z.object({
+  cars: z.array(CarSchema),
 });
 
 export type Owner = z.infer<typeof OwnerSchema>;
 
 export type Car = z.infer<typeof CarSchema>;
 
-// export interface Service {}
+export type Service = z.infer<typeof ServiceSchema>;

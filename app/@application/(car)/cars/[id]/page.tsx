@@ -1,23 +1,35 @@
 import { getCarById } from '@/app/api/cars/operations';
-import { updateCar } from '@/app/api/cars/operations';
-import CarForm from '@/components/CarForm';
 import Accordion from '@/ui/Accordion';
+import Button from '@/ui/Button';
 
 export default async function CarDetailPage({
   params,
 }: {
   params: { id: string };
 }) {
-  const car = await getCarById(params.id);
+  const { services } = await getCarById(params.id);
 
   return (
-    <div className="px-8 py-5">
-      <h2 className="text-3xl font-bold">
-        {car.make} {car.model}
-      </h2>
-      <Accordion label="Details">
-        <CarForm car={car} operation={updateCar} />
-      </Accordion>
-    </div>
+    <Accordion label="Services">
+      <div className="py-5">
+        <ul className="flex snap-x gap-3 overflow-x-auto">
+          {services.length ? (
+            services.map((value) => (
+              <li
+                key={value.toISOString()}
+                className="snap-center whitespace-nowrap"
+              >
+                <Button>{value.toLocaleDateString()}</Button>
+              </li>
+            ))
+          ) : (
+            <div className="flex w-full items-center justify-between">
+              <span>No service recorded yet.</span>
+              <Button>Add Service</Button>
+            </div>
+          )}
+        </ul>
+      </div>
+    </Accordion>
   );
 }

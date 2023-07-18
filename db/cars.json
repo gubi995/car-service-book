@@ -16,7 +16,12 @@
         "name": "Grúber Adrián",
         "address": "6727, Szeged, Dialdal utca 4/A",
         "phoneNumber": "+36202297961"
-      }
+      },
+      "services": [
+        "2023-12-12T08:26:09.484Z",
+        "2022-11-12T08:26:09.484Z",
+        "2021-02-02T08:26:09.484Z"
+      ]
     },
     {
       "make": "Suzuki",
@@ -34,7 +39,8 @@
         "name": "Grúber Adrián",
         "address": "Diadal utca 4/A",
         "phoneNumber": "+36202297961"
-      }
+      },
+      "services": []
     }
   ]
 }

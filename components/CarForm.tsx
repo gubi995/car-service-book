@@ -30,7 +30,7 @@ const defaultValues: Car = {
 
 interface CarFormProps {
   car?: Car;
-  operation: (car: Car) => Promise<void>;
+  operation: (car: Car) => Promise<{ error: string } | undefined>;
 }
 
 export default function CarForm({ car, operation }: CarFormProps) {
@@ -46,8 +46,12 @@ export default function CarForm({ car, operation }: CarFormProps) {
   const [isPending, startTransition] = useTransition();
 
   const onSubmit: SubmitHandler<Car> = (car) => {
-    startTransition(() => {
-      operation(car);
+    startTransition(async () => {
+      const data = await operation(car);
+
+      if (data?.error) {
+        alert(data.error);
+      }
     });
   };
 

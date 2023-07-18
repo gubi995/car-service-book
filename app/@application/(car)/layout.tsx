@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import { getCars } from '@/app/api/cars/operations';
+import ActiveLink from '@/ui/ActiveLink';
 
 export default async function RootLayout({
   children,
@@ -25,11 +26,14 @@ export default async function RootLayout({
                 {cars.length ? (
                   cars.map(({ plateNumber, make, model, chassisNumber }) => (
                     <li key={plateNumber}>
-                      <Link href={`/cars/${chassisNumber}`}>
+                      <ActiveLink
+                        href={`/cars/${chassisNumber}`}
+                        activeClassName="font-semibold"
+                      >
                         <span className="text-sm">
                           {make} {model} <span>({plateNumber})</span>
                         </span>
-                      </Link>
+                      </ActiveLink>
                     </li>
                   ))
                 ) : (
